@@ -1,80 +1,117 @@
-export PATH=/opt/homebrew/bin:$PATH
+# ~/.zshrc
+# Interactive shell: keybinds, completion, plugins, prompt
 
-#
-# Executes commands at the start of an interactive session.
-#
-# Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
-#
+# ====================
+# Options / History
+# ====================
+setopt auto_cd
+setopt interactive_comments
+setopt hist_ignore_dups
+setopt hist_ignore_space
+setopt share_history
 
-# =====================================================
+HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
 
-# zplug
+# ====================
+# Keymaps
+# ====================
+bindkey -v
+bindkey '^A' beginning-of-line
 
-#export ZPLUG_HOME=/usr/local/opt/zplug
-#source $ZPLUG_HOME/init.zsh
+# ====================
+# Aliases / functions
+# ====================
+alias ocaml='rlwrap ocaml'
+alias ll='ls -la'
+alias vi='nvim'
 
-# 使いたいzshのプラグインを以下に入れていく
-#zplug "zsh-users/zsh-autosuggestions"
-#zplug "zsh-users/zsh-syntax-highlighting"
-#zplug "zsh-users/zsh-completions"
+# brew wrapper (avoid aliasing brew directly; keep access to real brew)
+unalias brew 2>/dev/null
+brew() { "$HOME/dev/brewfile/brew_with_commit.sh" "$@"; }
+alias realbrew='command brew'
 
-#if ! zplug check --verbose; then
-#  printf 'Install? [y/N]: '
-#  if read -q; then
-#    echo; zplug install
-#  fi
-#fi
-#zplug load --verbose
+# ====================
+# History search (peco)
+# ====================
+peco-select-history() {
+  local tac
+  if command -v tac >/dev/null 2>&1; then
+    tac="tac"
+  else
+    tac="tail -r"
+  fi
 
-# =====================================================
-
-# Source Prezto.
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-fi
-
-# テーマ
-source ~/.zsh/zsh-dircolors-nord/zsh-dircolors-nord.zsh
-
-# Customize to your needs...
-
-#
-# PECOの設定 ==========================================
-#
-function peco-select-history() {
-    local tac
-    if which tac > /dev/null; then
-        tac="tac"
-    else
-        tac="tail -r"
-    fi
-    BUFFER=$(\history -n 1 | \
-        eval $tac | \
-        peco --query "$LBUFFER")
-    CURSOR=$#BUFFER
-    zle clear-screen
+  BUFFER=$(history -n 1 | eval "$tac" | peco --query "$LBUFFER")
+  CURSOR=$#BUFFER
+  zle clear-screen
 }
 zle -N peco-select-history
-bindkey '^r' peco-select-history
+bindkey '^R' peco-select-history
 
-#
-# MacVim (mvim) の設定
-#
-# alias vim=mvim
+# ====================
+# Tool inits (lightweight)
+# ====================
+[[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
+[[ -s "$HOME/.bun/_bun" ]] && source "$HOME/.bun/_bun"
+[[ -f "$HOME/.local/bin/env" ]] && source "$HOME/.local/bin/env"
 
+# rbenv init (interactive)
+if command -v rbenv >/dev/null 2>&1; then
+  eval "$(rbenv init -)"
+fi
 
-#
-# その他のエイリアス
-#
-alias gd="cd ~/Google\ Drive"
+# ====================
+# Lazy-load nvm (recommended)
+# ====================
+export NVM_DIR="$HOME/.nvm"
+__load_nvm() {
+  [[ -s "$NVM_DIR/nvm.sh" ]] || return 1
+  source "$NVM_DIR/nvm.sh"
+  [[ -s "$NVM_DIR/bash_completion" ]] && source "$NVM_DIR/bash_completion"
+}
 
-# prezto
-#lsコマンドの色を変更
-#
-export LSCOLORS=gxfxcxdxbxegedabagacad
+nvm()  { unfunction nvm node npm npx 2>/dev/null; __load_nvm; nvm  "$@"; }
+node() { unfunction nvm node npm npx 2>/dev/null; __load_nvm; node "$@"; }
+npm()  { unfunction nvm node npm npx 2>/dev/null; __load_nvm; npm  "$@"; }
+npx()  { unfunction nvm node npm npx 2>/dev/null; __load_nvm; npx  "$@"; }
 
-# todo.sh
-alias todo="todo.sh"
+# ====================
+# Completion (native zsh)
+# ====================
+autoload -Uz compinit
+ZSH_COMPDUMP="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump"
+mkdir -p "${ZSH_COMPDUMP:h}"
+compinit -d "$ZSH_COMPDUMP"
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+zstyle ':completion:*' menu select
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*' matcher-list \
+  'm:{a-zA-Z}={A-Za-z}' \
+  'r:|[._-]=* r:|=*' \
+  'l:|=* r:|=*'
+
+# ====================
+# zinit + plugins
+# ====================
+ZINIT_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/zinit/zinit.git"
+if [[ -f "${ZINIT_HOME}/zinit.zsh" ]]; then
+  source "${ZINIT_HOME}/zinit.zsh"
+
+  zinit light zsh-users/zsh-autosuggestions
+  zinit light zdharma-continuum/fast-syntax-highlighting
+  zinit light zsh-users/zsh-history-substring-search
+
+  # history-substring-search keybinds (vi-friendly)
+  bindkey '^[[A' history-substring-search-up
+  bindkey '^[[B' history-substring-search-down
+  bindkey '^P' history-substring-search-up
+  bindkey '^N' history-substring-search-down
+fi
+
+# ====================
+# Prompt
+# ====================
+command -v starship >/dev/null 2>&1 && eval "$(starship init zsh)"
+
