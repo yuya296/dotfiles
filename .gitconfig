@@ -1,0 +1,15 @@
+[user]
+	name = yuya296
+	email = yuya296@gmail.com
+[alias]
+	st = status
+	b  = branch
+	c  = commit
+	co = checkout
+	s  = switch
+	ll = log --oneline
+[core]
+	editor = nvim
+	quotepath = false
+[push]
+	autoSetupRemote = true

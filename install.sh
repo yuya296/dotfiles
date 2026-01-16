@@ -7,6 +7,7 @@ links=(
   "$DOTFILES_DIR/.zshrc:$HOME/.zshrc"
   "$DOTFILES_DIR/.zprofile:$HOME/.zprofile"
   "$DOTFILES_DIR/.zshenv:$HOME/.zshenv"
+  "$DOTFILES_DIR/.gitconfig:$HOME/.gitconfig"
 )
 
 for pair in "${links[@]}"; do
