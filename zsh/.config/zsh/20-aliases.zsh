@@ -1,5 +1,6 @@
 # Aliases / functions
 alias ocaml='rlwrap ocaml'
+alias rm='rm -i'
 alias ll='ls -l'
 alias la='ls -la'
 alias vi='nvim'
