@@ -1,0 +1,56 @@
+model = "gpt-5.2-codex"
+network_access = true
+model_reasoning_effort = "medium"
+experimental_use_rmcp_client = true
+sandbox_mode = "workspace-write"
+
+notify = ["bash", "/Users/yuya/.codex/notify.sh"]
+
+[sandbox_workspace_write]
+network_access = true
+writable_roots = ['/Users/yuya/.pm2']
+
+[tools]
+
+[profiles.sub-agent-base]
+mcp.enabled = false
+
+[projects."/Users/yuya/dev/vscode_extension--wysiwyg-editor"]
+trust_level = "trusted"
+
+[projects."/Users/yuya/tools"]
+trust_level = "trusted"
+
+[notice]
+"hide_gpt-5.1-codex-max_migration_prompt" = true
+
+[notice.model_migrations]
+"gpt-5.1-codex-mini" = "gpt-5.2-codex"
+
+[mcp_servers.context7]
+command = "npx"
+args = ["-y", "@upstash/context7-mcp"]
+
+[mcp_servers.figma]
+url = "https://mcp.figma.com/mcp"
+enabled = false
+
+[mcp_servers.notion]
+url = "https://mcp.notion.com/mcp"
+enabled = false
+
+[mcp_servers.mobile]
+command = "npx"
+args = ["-y", "@mobilenext/mobile-mcp@latest"]
+enabled = false
+
+[mcp_servers.github]
+url = "https://api.githubcopilot.com/mcp"
+
+[mcp_servers.github.env_http_headers]
+Authorization = "GITHUB_PAT_BEARER"
+
+[mcp_servers.chrome-devtools]
+command = "npx"
+args = ["chrome-devtools-mcp@latest"]
+
