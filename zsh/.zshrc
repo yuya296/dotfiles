@@ -24,7 +24,8 @@ bindkey '^A' beginning-of-line
 # Aliases / functions
 # ====================
 alias ocaml='rlwrap ocaml'
-alias ll='ls -la'
+alias ll='ls -l'
+alias la='ls -la'
 alias vi='nvim'
 
 # brew wrapper (avoid aliasing brew directly; keep access to real brew)
