@@ -3,5 +3,9 @@
 [[ -s "$HOME/.bun/_bun" ]] && source "$HOME/.bun/_bun"
 [[ -f "$HOME/.local/bin/env" ]] && source "$HOME/.local/bin/env"
 
+## Editor
 export VISUAL=nvim
 export EDITOR=nvim
+
+## Docker
+export DOCKER_HOST="unix://$HOME/.docker/run/docker.sock"
