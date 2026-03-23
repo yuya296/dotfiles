@@ -1,0 +1,123 @@
+# ~/.codex/rules/gh.rules
+#
+# Policy:
+# - PR: create/comment/review = allow, merge = prompt
+# - Issue: create/close/edit/reopen/comment = allow
+# - Workflow: mostly allow (list/view) ; run/enable/disable = prompt
+# - Privileged/destructive commands = prompt
+
+# PR: merge以外は実用上 allow（mergeは上でprompt）
+prefix_rule(
+    pattern = ["gh", "pr", [
+        "checkout",
+        "status",
+        "list",
+        "checks",
+        "comment",
+        "diff",
+        "edit",
+        "ready",
+        "update-branch",
+        "view",
+        "review",
+    ]],
+    decision = "allow",
+    justification = "PR authoring/review actions are allowed; merge is separately prompted.",
+    match = [
+        "gh pr list",
+        "gh pr view 123",
+        "gh pr comment 123 --body 'LGTM'",
+        "gh pr review 123 --approve",
+    ],
+    not_match = [
+        "gh pr merge 123",
+        "gh pr revert 123",
+        "gh pr create --fill",
+    ]
+)
+
+# gh run: 基本Allow
+prefix_rule(
+    pattern = ["gh", "run", [
+        "cancel", 
+        "list", 
+        "download", 
+        "rerun", 
+        "view", 
+        "watch"
+    ]],
+    decision = "allow",
+    justification = "workflow系は基本Allow. deleteのみPrompt扱",
+    match = [
+        "gh run rerun 123456",
+        "gh run cancel 123456",
+        "gh run watch 123456",
+        "gh run view 22272954803 --job 64430489371 --log-failed",
+        "gh run list",
+    ],
+    not_match = [
+        "gh run delete 123456",
+    ]
+)
+
+# Custom: PRコメント周りの操作(gh alias設定)
+prefix_rule(
+    pattern = ["gh", [
+        "pr-comment-reply",
+        "pr-comment-resolve",
+        "pr-comment-unresolve"
+    ]],
+    decision = "allow",
+)
+
+prefix_rule(
+    pattern = ["gh", [
+        "help",
+        "version",
+        "status",
+        "search",
+        "browse",
+    ]],
+    decision = "allow",
+    justification = "General read-only commands are allowed.",
+    match = [
+        "gh help",
+        "gh version",
+        "gh status",
+        "gh search prs bug",
+        "gh browse",
+    ],
+)
+
+# Issue: すべてOK
+prefix_rule(
+    pattern = ["gh", "issue"],
+    decision = "allow",
+    justification = "Issue lifecycle operations are allowed.",
+    match = [
+        "gh issue list",
+        "gh issue view 123",
+        "gh issue create --title 'bug' --body 'detail'",
+        "gh issue close 123",
+        "gh issue reopen 123",
+        "gh issue edit 123 --title 'new title'",
+        "gh issue comment 123 --body 'noted'",
+    ],
+)
+
+# Workflow: run/enable/disable 以外は allow
+prefix_rule(
+    pattern = ["gh", "workflow", [ "list", "view" ]],
+    decision = "allow",
+    justification = "Workflow: 閲覧系はAllow",
+    match = [
+        "gh workflow list",
+        "gh workflow view ci.yml",
+    ],
+)
+
+# ガードレール的に後戻り不可なコマンドをforbidden
+prefix_rule(decision = "forbidden", pattern = ["gh", "issue", "delete"])
+prefix_rule(decision = "forbidden", pattern = ["gh", "run", "delete"])
+
+

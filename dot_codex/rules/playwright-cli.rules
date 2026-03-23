@@ -1,0 +1,112 @@
+# ~/.codex/rules/playwright-cli.rules
+#
+# Rules for playwright-cli terminal automation commands.
+# Keep only playwright-cli-related rules in this file.
+
+# 危険度が高い操作（禁止）
+prefix_rule(
+    pattern = ["playwright-cli", "kill-all"],
+    decision = "forbidden",
+    justification = "Force-killing all browser sessions is destructive.",
+    match = [
+        "playwright-cli kill-all",
+    ],
+)
+
+# 事前確認が必要な操作（承認）
+prefix_rule(
+    pattern = ["playwright-cli", [
+        "eval",
+        "run-code",
+        "delete-data",
+        "install",
+        "install-browser",
+        "upload",
+        "state-load",
+        "state-save",
+        "cookie-set",
+        "cookie-delete",
+        "cookie-clear",
+        "localstorage-set",
+        "localstorage-delete",
+        "localstorage-clear",
+        "sessionstorage-set",
+        "sessionstorage-delete",
+        "sessionstorage-clear",
+        "route",
+        "unroute",
+    ]],
+    decision = "prompt",
+    justification = "Mutating or environment-changing operations require approval.",
+    match = [
+        "playwright-cli eval \"() => document.title\"",
+        "playwright-cli install-browser",
+        "playwright-cli delete-data",
+    ],
+)
+
+# 日常的なブラウザ操作・参照系（許可）
+prefix_rule(
+    pattern = ["playwright-cli", [
+        "open",
+        "close",
+        "goto",
+        "type",
+        "click",
+        "dblclick",
+        "fill",
+        "drag",
+        "hover",
+        "select",
+        "check",
+        "uncheck",
+        "snapshot",
+        "dialog-accept",
+        "dialog-dismiss",
+        "resize",
+        "go-back",
+        "go-forward",
+        "reload",
+        "press",
+        "keydown",
+        "keyup",
+        "mousemove",
+        "mousedown",
+        "mouseup",
+        "mousewheel",
+        "screenshot",
+        "pdf",
+        "tab-list",
+        "tab-new",
+        "tab-close",
+        "tab-select",
+        "cookie-list",
+        "cookie-get",
+        "localstorage-list",
+        "localstorage-get",
+        "sessionstorage-list",
+        "sessionstorage-get",
+        "route-list",
+        "console",
+        "network",
+        "show",
+        "devtools-start",
+        "tracing-start",
+        "tracing-stop",
+        "video-start",
+        "video-stop",
+        "list",
+        "close-all",
+        "--help",
+        "--version",
+    ]],
+    decision = "allow",
+    justification = "Interactive navigation and read-oriented inspection commands are allowed.",
+    match = [
+        "playwright-cli open",
+        "playwright-cli goto https://example.com",
+        "playwright-cli snapshot",
+        "playwright-cli tab-list",
+        "playwright-cli list",
+    ],
+)

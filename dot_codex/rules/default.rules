@@ -1,0 +1,11 @@
+# ~/.codex/rules/default.rules
+#
+# Minimal common rules only.
+# - Keep this file thin and non-domain-specific.
+# - If a CLI needs 3+ rules, move them to a dedicated <cli>.rules file.
+# - Avoid one-off rules here.
+
+prefix_rule(pattern=["sleep"], decision="allow")
+prefix_rule(pattern=["playwright-cli", "-s=slack-check", "upload", "/Users/yuya/dev/codex-agent/tmp-upload.png"], decision="allow")
+prefix_rule(pattern=["docker", "compose"], decision="allow")
+prefix_rule(pattern=["uv", "sync"], decision="allow")

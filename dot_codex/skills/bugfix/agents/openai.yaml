@@ -1,0 +1,3 @@
+interface:
+  display_name: "Bugfix Root Cause Guardrails"
+  short_description: "Fix bugs via root-cause analysis and prevention"

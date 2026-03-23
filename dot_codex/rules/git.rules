@@ -1,0 +1,92 @@
+# 破壊的・リスク高めのブランチ操作（禁止）
+prefix_rule(
+    pattern = ["git", "branch", ["-d", "-D", "--delete", "-m", "-M"]],
+    decision = "forbidden",
+    justification = "Branch delete/rename operations are destructive or risky.",
+    match = [
+        "git branch -d feature/x",
+        "git branch -D feature/x",
+        "git branch --delete feature/x",
+        "git branch -m old new",
+    ],
+)
+
+prefix_rule(
+    pattern = ["git", "checkout", "--"],
+    decision = "forbidden",
+    justification = "Checking out paths can discard local changes.",
+    match = [
+        "git checkout -- src/file.ts",
+    ],
+)
+
+prefix_rule(
+    pattern = ["git", "switch", "--discard-changes"],
+    decision = "forbidden",
+    justification = "Discarding changes while switching branches is risky.",
+    match = [
+        "git switch --discard-changes main",
+    ],
+)
+
+# 基本の Git 操作（許可）
+prefix_rule(
+    pattern = ["git", [
+        "add",
+        "checkout",
+        "commit",
+        "status",
+        "switch",
+        "diff",
+        "log",
+        "show",
+        "push",
+        "pull",
+        "fetch",
+        "blame",
+        "grep",
+        "rev-parse",
+        "ls-files",
+        "cat-file",
+        "describe",
+        "shortlog",
+        "name-rev",
+        "whatchanged",
+        "range-diff",
+        "help",
+        "version",
+    ]],
+    decision = "allow",
+    justification = "Read-only git inspection commands are allowed.",
+    match = [
+        "git add -A",
+        "git commit -m 'msg'",
+        "git push origin main",
+        "git status",
+        "git diff --stat",
+        "git log -n 20 --oneline",
+        "git show HEAD",
+        "git rev-parse HEAD",
+    ],
+)
+
+# ブランチ参照操作（許可）
+prefix_rule(
+    pattern = ["git", "branch", [
+        "--list",
+        "-a",
+        "-r",
+        "--all",
+        "--show-current",
+        "-v",
+        "-vv",
+    ]],
+    decision = "allow",
+    justification = "Read-only branch inspection options are allowed.",
+    match = [
+        "git branch --list",
+        "git branch -a",
+        "git branch --show-current",
+        "git branch -vv",
+    ],
+)
