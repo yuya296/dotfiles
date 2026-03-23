@@ -1,0 +1,4 @@
+# ~/.zshenv
+# Minimal, safe environment for ALL zsh invocations (interactive/non-interactive)
+
+export ZDOTDIR="$HOME/.config/zsh"
