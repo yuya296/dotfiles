@@ -1,19 +1,3 @@
-# History search (peco)
-peco-select-history() {
-  local tac
-  if command -v tac >/dev/null 2>&1; then
-    tac="tac"
-  else
-    tac="tail -r"
-  fi
-
-  BUFFER=$(history -n 1 | eval "$tac" | peco --query "$LBUFFER")
-  CURSOR=$#BUFFER
-  zle clear-screen
-}
-zle -N peco-select-history
-bindkey '^R' peco-select-history
-
 setopt APPEND_HISTORY           # 履歴を上書きでなく追記
 setopt EXTENDED_HISTORY         # 実行時刻と所要時間を保存
 setopt HIST_EXPIRE_DUPS_FIRST   # 件数超過時は重複から先に削除
