@@ -1,3 +1,3 @@
 # Keymaps
-bindkey -v
+bindkey -e
 bindkey '^A' beginning-of-line
