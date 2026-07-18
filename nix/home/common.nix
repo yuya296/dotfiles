@@ -27,6 +27,12 @@ in {
     pkgs.gitleaks
     pkgs.tree
     pkgs.watch
+    pkgs.awscli2
+    pkgs.exiftool
+    pkgs.ffmpeg
+    pkgs.imagemagick
+    pkgs.pandoc
+    pkgs.go
   ];
 
   home.file = {
