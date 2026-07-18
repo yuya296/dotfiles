@@ -3,6 +3,8 @@
 let
   unstable = inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system};
 in {
+  imports = [ ./zsh.nix ];
+
   home.username = "yuya";
   home.stateVersion = "25.05";
 
@@ -15,7 +17,6 @@ in {
     pkgs.git
     pkgs.gh
     unstable.neovim
-    pkgs.starship
     pkgs.zellij
     pkgs.lazygit
     pkgs.uv
@@ -26,7 +27,6 @@ in {
   ];
 
   home.file = {
-    ".zshenv".source = ../../dot_zshenv;
     ".gitconfig".source = ../../dot_gitconfig;
     # Rules and skills remain managed outside Home Manager. The copied TOML
     # deliberately excludes the GitHub MCP authorization-header configuration.
@@ -34,12 +34,6 @@ in {
   };
 
   xdg.configFile = {
-    "zsh/.zprofile".source = ../../dot_config/zsh/dot_zprofile;
-    "zsh/.zshrc".source = ../../dot_config/zsh/dot_zshrc;
-    "zsh/zsh.d" = {
-      source = ../../dot_config/zsh/zsh.d;
-      recursive = true;
-    };
     "git/config".source = ../../dot_config/git/config;
     "git/ignore".source = ../../dot_config/git/ignore;
     "nvim" = {

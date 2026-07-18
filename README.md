@@ -11,6 +11,8 @@ home-manager switch --flake .#yuya-darwin
 
 適用後は新しいターミナルを開く。
 
+端末固有の zsh 上書きは `~/.config/zsh/local.zsh` に置く（Git / Nix 管理外）。雛形は `nix/zsh/local.zsh.example`。
+
 ## 確認
 
 ```sh
