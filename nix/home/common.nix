@@ -35,12 +35,6 @@ in {
     pkgs.go
   ];
 
-  home.file = {
-    # Rules and skills remain managed outside Home Manager. The copied TOML
-    # deliberately excludes the GitHub MCP authorization-header configuration.
-    ".codex/config.toml".source = ../config/codex/config.toml;
-  };
-
   xdg.configFile = {
     "nvim" = {
       source = ../config/nvim;
