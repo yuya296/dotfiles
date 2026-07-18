@@ -27,10 +27,23 @@ fi
 # Deduplicate path arrays
 typeset -gU path cdpath fpath manpath
 
+# Nix (multi-user daemon). Load this before Homebrew, then put the per-user
+# profile first below so Nix-managed developer CLIs take precedence.
+if [[ -r /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]]; then
+  source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+fi
+
 # Homebrew (preferred)
 if [[ -x /opt/homebrew/bin/brew ]]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
+
+# Home Manager's profile takes precedence over Homebrew for managed CLI tools.
+path=(
+  $HOME/.nix-profile/bin
+  /nix/var/nix/profiles/default/bin
+  $path
+)
 
 # Add paths (only things you want available everywhere)
 path=(
@@ -68,4 +81,3 @@ export PATH
 
 # UI / ls colors (environment-level)
 export LSCOLORS=gxfxcxdxbxegedabagacad
-
