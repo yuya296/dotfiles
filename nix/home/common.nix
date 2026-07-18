@@ -37,13 +37,13 @@ in {
 
   xdg.configFile = {
     "nvim" = {
-      source = ../../dot_config/nvim;
+      source = ../config/nvim;
       recursive = true;
     };
-    "ghostty/config".source = ../../dot_config/ghostty/config;
-    "zellij/config.kdl".source = ../../dot_config/zellij/config.kdl;
-    "starship.toml".source = ../../dot_config/starship.toml;
-    "gh/config.yml".source = ../../dot_config/gh/private_config.yml;
+    "ghostty/config".source = ../config/ghostty/config;
+    "zellij/config.kdl".source = ../config/zellij/config.kdl;
+    "starship.toml".source = ../config/starship.toml;
+    "gh/config.yml".source = ../config/gh/config.yml;
   };
 
   programs.home-manager.enable = true;

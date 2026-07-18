@@ -4,5 +4,5 @@
   home.sessionVariables.BROWSER = "open";
 
   xdg.configFile."karabiner/karabiner.json".source =
-    ../../dot_config/private_karabiner/private_karabiner.json;
+    ../config/karabiner/karabiner.json;
 }
