@@ -35,6 +35,10 @@ in {
     pkgs.go
   ];
 
+  home.file = {
+    ".stack/config.yaml".source = ../config/stack/config.yaml;
+  };
+
   xdg.configFile = {
     "nvim" = {
       source = ../config/nvim;
