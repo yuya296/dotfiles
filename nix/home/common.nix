@@ -37,24 +37,12 @@ in {
     unstable.postgresql
     # Global Python; project-specific versions are managed with uv.
     unstable.python3
-    unstable.ghostscript
-    pkgs.openssl
-    pkgs.gnutls
-    pkgs.libevent
-    pkgs.unbound
     pkgs.chromedriver
+    pkgs.pnpm
     # CLI tools migrated from Homebrew.
-    pkgs.aws-sam-cli
-    pkgs.clisp
-    pkgs.dfu-util
     pkgs.nkf
-    pkgs.ocaml
-    pkgs.poppler
     pkgs.ripgrep
     pkgs.sl
-    pkgs.stow
-    pkgs.terminal-notifier
-    pkgs.xcbeautify
   ];
 
   home.file = {
