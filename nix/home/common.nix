@@ -37,6 +37,11 @@ in {
     unstable.postgresql
     # Global Python; project-specific versions are managed with uv.
     unstable.python3
+    unstable.ghostscript
+    pkgs.openssl
+    pkgs.gnutls
+    pkgs.libevent
+    pkgs.unbound
     # CLI tools migrated from Homebrew.
     pkgs.aws-sam-cli
     pkgs.clisp
@@ -48,8 +53,6 @@ in {
     pkgs.sl
     pkgs.stow
     pkgs.terminal-notifier
-    pkgs.tnftp
-    pkgs.todo-txt
     pkgs.xcbeautify
   ];
 

@@ -29,8 +29,6 @@ in {
     "${config.home.homeDirectory}/dev/flutter/bin"
     "${config.home.homeDirectory}/.rbenv/bin"
     "${config.home.homeDirectory}/.bun/bin"
-  ] ++ lib.optionals pkgs.stdenv.isDarwin [
-    "/opt/homebrew/opt/openssl@3/bin"
   ];
 
   xdg.configFile."zsh/scripts" = {
