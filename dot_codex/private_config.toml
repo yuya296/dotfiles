@@ -1,4 +1,4 @@
-model = "gpt-5.4"
+model = "gpt-5.6-terra"
 network_access = true
 model_reasoning_effort = "high"
 experimental_use_rmcp_client = true

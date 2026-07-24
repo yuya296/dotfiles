@@ -35,5 +35,3 @@ npx()  { unfunction nvm node npm npx 2>/dev/null; __load_nvm; npx "$@"; }
 if (( $+commands[rbenv] )); then
   eval "$(rbenv init -)"
 fi
-
-[[ -r "$HOME/.opam/opam-init/init.zsh" ]] && source "$HOME/.opam/opam-init/init.zsh" >/dev/null 2>&1

@@ -6,7 +6,6 @@ in {
   xdg.enable = true;
 
   home.packages = [
-    pkgs.rlwrap
     pkgs.zsh-fzf-tab
     pkgs.zsh-fast-syntax-highlighting
   ];
@@ -83,7 +82,6 @@ in {
     };
 
     shellAliases = {
-      ocaml = "rlwrap ocaml";
       rm = "rm -i";
       ls = if pkgs.stdenv.isDarwin then "ls -G" else "ls --color=auto";
       ll = "ls -l";
