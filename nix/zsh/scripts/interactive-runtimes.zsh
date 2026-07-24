@@ -37,9 +37,3 @@ if (( $+commands[rbenv] )); then
 fi
 
 [[ -r "$HOME/.opam/opam-init/init.zsh" ]] && source "$HOME/.opam/opam-init/init.zsh" >/dev/null 2>&1
-
-# Preserve the local wrapper while leaving the underlying Homebrew command available.
-unalias brew 2>/dev/null
-if [[ -x "$HOME/dev/brewfile/brew_with_commit.sh" ]]; then
-  brew() { "$HOME/dev/brewfile/brew_with_commit.sh" "$@"; }
-fi

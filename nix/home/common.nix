@@ -33,6 +33,24 @@ in {
     pkgs.imagemagick
     pkgs.pandoc
     pkgs.go
+    # PostgreSQL client and server, managed by Nixpkgs unstable for the latest version.
+    unstable.postgresql
+    # Global Python; project-specific versions are managed with uv.
+    unstable.python3
+    # CLI tools migrated from Homebrew.
+    pkgs.aws-sam-cli
+    pkgs.clisp
+    pkgs.dfu-util
+    pkgs.nkf
+    pkgs.ocaml
+    pkgs.poppler
+    pkgs.ripgrep
+    pkgs.sl
+    pkgs.stow
+    pkgs.terminal-notifier
+    pkgs.tnftp
+    pkgs.todo-txt
+    pkgs.xcbeautify
   ];
 
   home.file = {

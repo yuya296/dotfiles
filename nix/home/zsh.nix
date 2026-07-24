@@ -91,7 +91,6 @@ in {
       ll = "ls -l";
       la = "ls -la";
       vi = "nvim";
-      realbrew = "command brew";
     };
 
     profileExtra = ''
