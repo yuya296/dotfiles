@@ -42,6 +42,7 @@ in {
     pkgs.gnutls
     pkgs.libevent
     pkgs.unbound
+    pkgs.chromedriver
     # CLI tools migrated from Homebrew.
     pkgs.aws-sam-cli
     pkgs.clisp
