@@ -28,6 +28,7 @@ in {
     "${config.home.homeDirectory}/dev/flutter/bin"
     "${config.home.homeDirectory}/.rbenv/bin"
     "${config.home.homeDirectory}/.bun/bin"
+    "${config.home.homeDirectory}/.cargo/bin"
   ];
 
   xdg.configFile."zsh/scripts" = {

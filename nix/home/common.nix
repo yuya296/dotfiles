@@ -37,8 +37,10 @@ in {
     unstable.postgresql
     # Global Python; project-specific versions are managed with uv.
     unstable.python3
+    unstable.python3Packages.pyyaml
     pkgs.chromedriver
     pkgs.pnpm
+    pkgs.rustup
     # CLI tools migrated from Homebrew.
     pkgs.nkf
     pkgs.ripgrep
