@@ -6,7 +6,7 @@ Nix + Home Manager で CLI と dotfiles を管理する。GUI アプリと各言
 
 ```sh
 cd ~/dotfiles
-home-manager switch --flake .#yuya-darwin
+home-manager switch --flake .#darwin
 ```
 
 適用後は新しいターミナルを開く。
@@ -23,7 +23,7 @@ nix flake check --no-build
 
 ```sh
 nix flake update
-home-manager switch --flake .#yuya-darwin
+home-manager switch --flake .#darwin
 ```
 
 ## 戻す
@@ -33,4 +33,4 @@ home-manager generations
 home-manager switch --rollback
 ```
 
-Linux では `.#yuya-linux` を指定する。
+Ubuntu では `.#ubuntu` を指定する。

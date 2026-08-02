@@ -20,15 +20,11 @@
         };
     in {
       homeConfigurations = {
-        yuya-darwin = mkHome {
+        darwin = mkHome {
           system = "aarch64-darwin";
           module = ./nix/home/darwin.nix;
         };
-        yuya-linux = mkHome {
-          system = "x86_64-linux";
-          module = ./nix/home/linux.nix;
-        };
-        ubuntu-linux = mkHome {
+        ubuntu = mkHome {
           system = "aarch64-linux";
           module = ./nix/home/linux-ubuntu.nix;
         };
