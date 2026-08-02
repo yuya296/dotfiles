@@ -45,6 +45,7 @@ in {
     pkgs.nkf
     pkgs.ripgrep
     pkgs.sl
+    pkgs.tailscale
   ];
 
   home.file = {
