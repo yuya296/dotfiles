@@ -10,6 +10,9 @@ theme = tokyonight
 font-family = "JetBrains Mono"
 font-size = 15
 
+# ssh
+term = xterm-256color
+
 # macOS config
 macos-titlebar-style = tabs
 macos-option-as-alt = true
