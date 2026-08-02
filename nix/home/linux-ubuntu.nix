@@ -5,5 +5,6 @@
 
   home.packages = [
     pkgs.bubblewrap
+    pkgs.tmux
   ];
 }
