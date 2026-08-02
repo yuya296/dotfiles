@@ -24,6 +24,7 @@ in {
   home.sessionPath = [
     "${config.home.homeDirectory}/bin"
     "${config.home.homeDirectory}/sbin"
+    "${config.home.homeDirectory}/.local/bin"
     "/usr/local/bin"
     "${config.home.homeDirectory}/dev/flutter/bin"
     "${config.home.homeDirectory}/.rbenv/bin"
