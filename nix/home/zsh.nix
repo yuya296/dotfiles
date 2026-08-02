@@ -95,6 +95,11 @@ in {
     '';
 
     initContent = lib.mkMerge [
+      (lib.mkOrder 100 ''
+        if [[ "$TERM" == xterm-ghostty ]]; then
+          export TERM=xterm-256color
+        fi
+      '')
       (lib.mkOrder 500 ''
         source "$ZDOTDIR/scripts/interactive-runtimes.zsh"
       '')

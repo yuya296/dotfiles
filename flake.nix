@@ -28,6 +28,10 @@
           system = "x86_64-linux";
           module = ./nix/home/linux.nix;
         };
+        ubuntu-linux = mkHome {
+          system = "aarch64-linux";
+          module = ./nix/home/linux-ubuntu.nix;
+        };
       };
     };
 }
