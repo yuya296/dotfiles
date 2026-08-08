@@ -3,19 +3,21 @@
 copy-on-select = "clipboard"
 keybind = shift+enter=text:\n
 
-# テーマ
+# theme
 theme = tokyonight
 
-# フォント
+# font
 font-family = "JetBrains Mono"
-font-family = "BIZ UDGothic"
 font-size = 15
 
-# macOS 設定
+# ssh
+term = xterm-256color
+
+# macOS config
 macos-titlebar-style = tabs
 macos-option-as-alt = true
 
-# ウィンドウ
+# window settings
 window-padding-x = 4
 window-padding-y = 4
 window-padding-balance = true
@@ -25,18 +27,17 @@ window-save-state = always
 background-opacity = 0.85
 background-blur-radius = 20
 
-# カーソル
+# cursor settings
 cursor-opacity = 0.8
 cursor-color = ffffff
 cursor-style = "block"
 cursor-style-blink = true
 cursor-click-to-move = true
 
-# 自動更新
+# auto-update
 auto-update = "check"
 auto-update-channel = "stable"
 
 # KeyBindings
 keybind = cmd+z=undo
 keybind = cmd+shift+z=redo
-

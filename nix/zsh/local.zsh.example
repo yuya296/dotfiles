@@ -1,0 +1,2 @@
+# Machine-local interactive zsh overrides.
+# Copy this to ~/.config/zsh/local.zsh; the real file is intentionally unmanaged.

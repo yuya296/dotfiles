@@ -69,9 +69,6 @@ format = '\[[$symbol($version)]($style)\]'
 [fennel]
 format = '\[[$symbol($version)]($style)\]'
 
-[fortran]
-format = '\[[$symbol($version)]($style)\]'
-
 [fossil_branch]
 format = '\[[$symbol$branch]($style)\]'
 
@@ -271,9 +268,6 @@ format = '\[[$symbol($version)]($style)\]'
 format = '\[vcsh [$symbol$repo]($style)\]'
 
 [vlang]
-format = '\[[$symbol($version)]($style)\]'
-
-[xmake]
 format = '\[[$symbol($version)]($style)\]'
 
 [zig]
