@@ -45,6 +45,8 @@ in {
     pkgs.nkf
     pkgs.ripgrep
     pkgs.sl
+    # Codex CLI, managed by Home Manager.
+    pkgs.codex
   ];
 
   home.file = {
